@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "0c67f81f-3171-4c7f-956c-e7a6fdedc5b9",
+		"name": "api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/auth/signup",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "alon@alush.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234567890",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"signup"
+					]
+				},
+				"description": "add user"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/auth/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "alon@alush.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "1234567890",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				},
+				"description": "login user"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/upload/file",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsb25AYWx1c2guY29tIiwidXNlcklkIjoiNWMzMjFmMzcwNzE2ZTczZWQ4Mzg0MDY2IiwiaWF0IjoxNTQ2ODA2MTg4LCJleHAiOjE1NDY4MDk3ODh9.rk-3djfQZjQCl1znzz4926yx3HjeZKCSQ54cz3RrrtY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "5c321f370716e73ed8384066",
+							"type": "text"
+						},
+						{
+							"key": "fileUpload",
+							"type": "file",
+							"src": ""
+						},
+						{
+							"key": "privacy",
+							"value": "0",
+							"type": "text"
+						},
+						{
+							"key": "creator",
+							"value": "\"5c321f370716e73ed8384066\"\n",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/upload/file",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"upload",
+						"file"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "5c321f370716e73ed8384066",
+							"disabled": true
+						}
+					]
+				},
+				"description": "upload file"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/upload/file/5c3265a4b2e3e705109b05ba",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsb25AYWx1c2guY29tIiwidXNlcklkIjoiNWMzMjFmMzcwNzE2ZTczZWQ4Mzg0MDY2IiwiaWF0IjoxNTQ2ODA2MTg4LCJleHAiOjE1NDY4MDk3ODh9.rk-3djfQZjQCl1znzz4926yx3HjeZKCSQ54cz3RrrtY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "5c321f370716e73ed8384066",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/upload/file/5c3265a4b2e3e705109b05ba",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"upload",
+						"file",
+						"5c3265a4b2e3e705109b05ba"
+					]
+				},
+				"description": "delete file"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/upload/file/5c3266536d5b273d70cde673",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsb25AYWx1c2guY29tIiwidXNlcklkIjoiNWMzMjFmMzcwNzE2ZTczZWQ4Mzg0MDY2IiwiaWF0IjoxNTQ2ODA2MTg4LCJleHAiOjE1NDY4MDk3ODh9.rk-3djfQZjQCl1znzz4926yx3HjeZKCSQ54cz3RrrtY",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "privacy",
+							"value": "true",
+							"type": "text"
+						},
+						{
+							"key": "userId",
+							"value": "5c321f370716e73ed8384066",
+							"type": "text"
+						},
+						{
+							"key": "fileUpload",
+							"type": "file",
+							"src": ""
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/upload/file/5c3266536d5b273d70cde673",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"upload",
+						"file",
+						"5c3266536d5b273d70cde673"
+					]
+				},
+				"description": "update file"
+			},
+			"response": []
+		}
+	]
+}
