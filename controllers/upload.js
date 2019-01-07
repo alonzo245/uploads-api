@@ -7,12 +7,13 @@ const Upload = require('../models/upload');
 const User = require('../models/user');
 
 exports.getUploads = (req, res, next) => {
+  console.log(req.userId)
   User.findById(req.userId)
     .populate('uploads')
     .then(uploads => {
       res.status(200).json({
         message: 'Fetched uploads successfully.',
-        uploads: uploads
+        info: uploads
       });
     })
     .catch(err => {
@@ -81,27 +82,32 @@ exports.getUpload = (req, res, next) => {
         throw error;
       }
 
+      console.log(req.header('X-Access-Token') !== upload.id)
+      console.log('upload.id ' + upload.id)
+      console.log('upload.privacy ' + upload.privacy)
+
       if (req.query.metadata === 'true') {
-        if (upload.privacy && req.header('x-auth-token') !== upload.id) {
+        if (upload.privacy && req.header('X-Access-Token') !== upload.id) {
+          
           const error = new Error('Not authorized!');
           error.statusCode = 403;
           throw error;
           return;
         }
-
+        console.log('dddd')
         const extension = path.extname(upload.uploadUrl);
         const fileSizeInBytes = fs.statSync(upload.uploadUrl).size;
         res.status(200).json({
           message: 'Upload fetched.',
-          upload: { 
-            name: upload.uploadUrl, 
+          upload: {
+            name: upload.uploadUrl,
             extension, fileSizeInBytes,
             modified: upload.updatedAt
           }
         });
 
       } else {
-        if (upload.privacy && req.header('x-auth-token') !== upload.id) {
+        if (upload.privacy && req.header('X-Access-Token') !== upload.id) {
           const error = new Error('Not authorized!');
           error.statusCode = 403;
           throw error;

@@ -6,7 +6,7 @@ const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
-router.get('/files', isAuth, uploadController.getUploads);
+router.post('/files', isAuth, uploadController.getUploads);
 
 router.get('/file/:uploadName', uploadController.getUpload);
 
