@@ -88,23 +88,23 @@ exports.getUpload = (req, res, next) => {
           throw error;
           return;
         }
+
         const extension = path.extname(upload.uploadUrl);
         const fileSizeInBytes = fs.statSync(upload.uploadUrl).size;
         res.status(200).json({
           message: 'Upload fetched.',
-          upload: { name: upload.uploadUrl, extension, fileSizeInBytes }
-        });
-        
-      } else {
-        if (upload.privacy) {
-
-          if (req.header('x-auth-token') === upload.id) {
-            return res.download(upload.uploadUrl);
-          } else {
-            const error = new Error('Not authorized!');
-            error.statusCode = 403;
-            throw error;
+          upload: { 
+            name: upload.uploadUrl, 
+            extension, fileSizeInBytes,
+            modified: upload.updatedAt
           }
+        });
+
+      } else {
+        if (upload.privacy && req.header('x-auth-token') !== upload.id) {
+          const error = new Error('Not authorized!');
+          error.statusCode = 403;
+          throw error;
 
         } else {
           return res.download(upload.uploadUrl);

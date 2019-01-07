@@ -242,6 +242,81 @@
 				"description": "update file"
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:3000/upload/files",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFsb25AYWx1c2guY29tIiwidXNlcklkIjoiNWMzMjFmMzcwNzE2ZTczZWQ4Mzg0MDY2IiwiaWF0IjoxNTQ2ODQxODQ2LCJleHAiOjE1NDY4NDU0NDZ9.MXH5qDlNYvoWbeSpXki-eR2VkG29iYqy28drUK5UApw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/upload/files",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"upload",
+						"files"
+					]
+				},
+				"description": "get uploads"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/upload/file/Capture.PNG234324.PNG?metadata=true",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "X-Auth-Token",
+						"value": "5c3326bb5b55db37c0fe26ac",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/upload/file/Capture.PNG234324.PNG?metadata=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"upload",
+						"file",
+						"Capture.PNG234324.PNG"
+					],
+					"query": [
+						{
+							"key": "metadata",
+							"value": "true"
+						}
+					]
+				},
+				"description": "download or get file metadata"
+			},
+			"response": []
 		}
 	]
 }
