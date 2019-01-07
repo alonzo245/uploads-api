@@ -17,7 +17,7 @@ const userSchema = new Schema({
   uploads: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'File'
+      ref: 'Upload'
     }
   ]
 });

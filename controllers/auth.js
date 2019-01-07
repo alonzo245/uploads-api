@@ -61,7 +61,7 @@ exports.login = (req, res, next) => {
           userId: loadedUser._id.toString()
         },
         'mycoolsecret',
-        { expiresIn: '1h' }
+        { expiresIn: '5h' }
       );
       res.status(200).json({ token: token, userId: loadedUser._id.toString() });
     })

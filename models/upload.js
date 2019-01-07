@@ -7,6 +7,10 @@ const uploadSchema = new Schema(
       type: Boolean,
       required: true
     },
+    uploadName: {
+      type: String,
+      required: true
+    },
     uploadUrl: {
       type: String,
       required: true
