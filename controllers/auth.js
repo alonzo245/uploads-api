@@ -45,7 +45,7 @@ exports.login = (req, res, next) => {
         error.statusCode = 401;
         throw error;
       }
-      console.log(user)
+      // console.log(user)
       loadedUser = user;
       return bcrypt.compare(password, user.password);
     })

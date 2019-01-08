@@ -7,7 +7,7 @@ const Upload = require('../models/upload');
 const User = require('../models/user');
 
 exports.getUploads = (req, res, next) => {
-  console.log(req.userId)
+  // console.log(req.userId)
   User.findById(req.userId)
     .populate('uploads')
     .then(uploads => {
@@ -25,15 +25,16 @@ exports.getUploads = (req, res, next) => {
 };
 
 exports.createUpload = (req, res, next) => {
+  
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    console.log('ss')
+    // console.log('ss')
     const error = new Error('Validation failed, entered data is incorrect.');
     error.statusCode = 422;
     throw error;
   }
   if (!req.file) {
-    console.log(req.file, "aaaa")
+    // console.log(req.file, "aaaa")
     const error = new Error('No upload provided.');
     error.statusCode = 422;
     throw error;
@@ -83,9 +84,9 @@ exports.getUpload = (req, res, next) => {
         throw error;
       }
 
-      console.log(req.header('X-Access-Token') !== upload.id)
-      console.log('upload.id ' + upload.id)
-      console.log('upload.privacy ' + upload.privacy)
+      // console.log(req.header('X-Access-Token') !== upload.id)
+      // console.log('upload.id ' + upload.id)
+      // console.log('upload.privacy ' + upload.privacy)
 
       if (req.query.metadata === 'true') {
         if (upload.privacy && req.header('X-Access-Token') !== upload.id) {
@@ -95,7 +96,7 @@ exports.getUpload = (req, res, next) => {
           throw error;
           return;
         }
-        console.log('dddd')
+        // console.log('dddd')
         const extension = path.extname(upload.uploadUrl);
         const fileSizeInBytes = fs.statSync(upload.uploadUrl).size;
         res.status(200).json({
