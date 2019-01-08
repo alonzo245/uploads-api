@@ -60,13 +60,13 @@ exports.login = (req, res, next) => {
           email: loadedUser.email,
           userId: loadedUser._id.toString()
         },
-        'mycoolsecret',
+        process.env.APP_SECRET,
         { expiresIn: '5h' }
       );
       res.status(200).json({ 
         token: token, 
         userId: loadedUser._id.toString(),
-        expiresIn: 3600,
+        expiresIn: 18000,
       });
     })
     .catch(err => {

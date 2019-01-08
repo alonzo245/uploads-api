@@ -17,8 +17,6 @@ router.post(
     body('userId')
       .trim(),
     body('privacy')
-      .trim(),
-    body('creator')
       .trim()
   ],
   uploadController.createUpload

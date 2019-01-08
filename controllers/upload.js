@@ -27,12 +27,13 @@ exports.getUploads = (req, res, next) => {
 exports.createUpload = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.log('ss')
     const error = new Error('Validation failed, entered data is incorrect.');
     error.statusCode = 422;
     throw error;
   }
-  console.log(req.file)
   if (!req.file) {
+    console.log(req.file, "aaaa")
     const error = new Error('No upload provided.');
     error.statusCode = 422;
     throw error;
