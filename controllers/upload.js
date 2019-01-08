@@ -25,10 +25,9 @@ exports.getUploads = (req, res, next) => {
 };
 
 exports.createUpload = (req, res, next) => {
-  
+
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    // console.log('ss')
     const error = new Error('Validation failed, entered data is incorrect.');
     error.statusCode = 422;
     throw error;
@@ -40,31 +39,47 @@ exports.createUpload = (req, res, next) => {
     throw error;
   }
 
-  let creator;
-  const uploadUrl = req.file.path;
-  const upload = new Upload({
-    uploadUrl: uploadUrl,
-    uploadName: req.file.originalname,
-    privacy: req.body.privacy,
-    creator: req.userId
-  });
+  Upload.find({ uploadName: req.file.originalname })
+    .then(uploadExist => {
+      if (uploadExist.length > 0) {
+        res.status(200).json({
+          message: 'Upload exist'
+        });
+        return false;
+      }
 
-  upload
-    .save()
-    .then(result => {
-      return User.findById(req.userId);
-    })
-    .then(user => {
-      creator = user;
-      user.uploads.push(upload);
-      return user.save();
-    })
-    .then(result => {
-      res.status(201).json({
-        message: 'Upload created!',
-        upload: upload,
-        creator: { _id: creator._id }
+      let creator;
+      const uploadUrl = req.file.path;
+      const upload = new Upload({
+        uploadUrl: uploadUrl,
+        uploadName: req.file.originalname,
+        privacy: req.body.privacy,
+        creator: req.userId
       });
+
+      upload
+        .save()
+        .then(result => {
+          return User.findById(req.userId);
+        })
+        .then(user => {
+          creator = user;
+          user.uploads.push(upload);
+          return user.save();
+        })
+        .then(result => {
+          res.status(201).json({
+            message: 'Upload created!',
+            upload: upload,
+            creator: { _id: creator._id }
+          });
+        })
+        .catch(err => {
+          if (!err.statusCode) {
+            err.statusCode = 500;
+          }
+          next(err);
+        });
     })
     .catch(err => {
       if (!err.statusCode) {
@@ -84,13 +99,9 @@ exports.getUpload = (req, res, next) => {
         throw error;
       }
 
-      // console.log(req.header('X-Access-Token') !== upload.id)
-      // console.log('upload.id ' + upload.id)
-      // console.log('upload.privacy ' + upload.privacy)
-
       if (req.query.metadata === 'true') {
         if (upload.privacy && req.header('X-Access-Token') !== upload.id) {
-          
+
           const error = new Error('Not authorized!');
           error.statusCode = 403;
           throw error;
