@@ -1,9 +1,10 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = (req, res, next) => {
-  // console.log('aaa')
   const authHeader = req.get('Authorization');
+  // console.log('authHeader', authHeader)
   if (!authHeader) {
+    // console.log('kkkk')
     const error = new Error('Not authenticated.');
     error.statusCode = 401;
     throw error;
@@ -17,6 +18,7 @@ module.exports = (req, res, next) => {
     throw err;
   }
   if (!decodedToken) {
+    // console.log('f')
     const error = new Error('Not authenticated.');
     error.statusCode = 401;
     throw error;

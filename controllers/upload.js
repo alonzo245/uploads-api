@@ -196,6 +196,7 @@ exports.deleteUpload = (req, res, next) => {
         error.statusCode = 404;
         throw error;
       }
+      console.log(req.userId)
       if (upload.creator.toString() !== req.userId) {
         const error = new Error('Not authorized!');
         error.statusCode = 403;

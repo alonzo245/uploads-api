@@ -26,11 +26,7 @@ const fileFilter = (req, file, cb) => {
   cb(null, true);
 };
 
-// app.use(bodyParser.urlencoded({
-//     extended: true
-// }));
-
-app.use(bodyParser.json()); // application/json
+app.use(bodyParser.json());
 app.use(
   multer({ storage: fileStorage, fileFilter: fileFilter }).single('fileUpload')
 );
@@ -51,7 +47,6 @@ app.use('/upload', uploadRoutes);
 app.use('/auth', authRoutes);
 
 app.use((error, req, res, next) => {
-  // console.log(error);
   const status = error.statusCode || 500;
   const message = error.message;
   const data = error.data;
