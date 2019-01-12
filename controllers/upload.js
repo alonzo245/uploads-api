@@ -28,11 +28,13 @@ exports.createUpload = (req, res, next) => {
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
+    console.log('dd')
     const error = new Error('Validation failed, entered data is incorrect.');
     error.statusCode = 422;
     throw error;
   }
   if (!req.file) {
+    console.log('eee')
     // console.log(req.file, "aaaa")
     const error = new Error('No upload provided.');
     error.statusCode = 422;
@@ -147,16 +149,17 @@ exports.updateUpload = (req, res, next) => {
     throw error;
   }
 
+  console.log('req.body.privacy', req.body.privacy)
   let privacy = req.body.privacy;
   let uploadUrl = req.body.uploadUrl;
   if (req.file) {
     uploadUrl = req.file.path;
   }
-  if (!uploadUrl) {
-    const error = new Error('No file picked.');
-    error.statusCode = 422;
-    throw error;
-  }
+  // if (!uploadUrl) {
+  //   const error = new Error('No file picked.');
+  //   error.statusCode = 422;
+  //   throw error;
+  // }
   Upload.findById(uploadId)
     .then(upload => {
       if (!upload) {
@@ -188,6 +191,7 @@ exports.updateUpload = (req, res, next) => {
 };
 
 exports.deleteUpload = (req, res, next) => {
+  console.log('ddd')
   const uploadId = req.params.uploadId;
   Upload.findById(uploadId)
     .then(upload => {

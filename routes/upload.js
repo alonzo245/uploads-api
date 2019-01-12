@@ -3,6 +3,7 @@ const { body } = require('express-validator/check');
 
 const uploadController = require('../controllers/upload');
 const isAuth = require('../middleware/is-auth');
+const fileUploader = require('../middleware/file-uploader');
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ router.get('/file/:uploadName', uploadController.getUpload);
 router.post(
   '/file',
   isAuth,
+  fileUploader,
   [
     body('userId')
       .trim(),
@@ -26,9 +28,7 @@ router.put(
   '/file/:uploadId',
   isAuth,
   [
-    body('title')
-      .trim(),
-    body('content')
+    body('privacy')
       .trim()
   ],
   uploadController.updateUpload
